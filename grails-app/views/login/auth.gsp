@@ -23,15 +23,17 @@
                     <g:if test='${flash.message}'>
                         <div class="alert alert-danger" role="alert">${flash.message}</div>
                     </g:if>
-                    <form class="form-signin" action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm" autocomplete="off">
+                    <form class="form-signin" action="${postUrl ?: '/login/authenticate'}" method="POST" id="loginForm" autocomplete="off" onsubmit="return validateForm()">
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" name="${usernameParameter ?: 'username'}" id="username" autocapitalize="none"/>
+                            <label for="username">Email</label>
+                            <input type="email" class="form-control" name="${usernameParameter ?: 'username'}" id="email" autocapitalize="none"/>
+                            <div class="" id="emailMsg"></div>
                         </div>
 
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" name="${passwordParameter ?: 'password'}" id="password"/>
+                            <div class="" id="passwordMsg"></div>
                             <i id="passwordToggler" title="toggle password display" onclick="passwordDisplayToggle()">&#128065;</i>
                         </div>
 
@@ -48,5 +50,37 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+
+        function validateForm()
+        {
+            let x = document.forms["loginForm"]["email"].value;
+            let y = document.forms["loginForm"]["password"].value;
+
+            if (x == "") {
+                console.log("Hello")
+                // alert("Name must be filled out");
+                $("#emailMsg").html("Email must be filled out").css("color", "blue");
+                $("#firstNameMsg").focus();
+                return false;
+            } else {
+                $("#firstNameMsg").html("");
+                // return true;
+            }
+            if (y == "") {
+                // alert("Password must be filled out");
+                $("#passwordMsg").html("Password must be filled out").css("color", "blue");
+                $("#passwordMsg").focus();
+                return false;
+            } else {
+                $("#firstNameMsg").html("");
+                // return true;
+            }
+        }
+
+
+    </script>
 </body>
 </html>

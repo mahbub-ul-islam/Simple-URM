@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Mahbub
-  Date: 9/24/2022
-  Time: 11:30 PM
+  Date: 9/27/2022
+  Time: 6:02 AM
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -13,8 +13,6 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet"
           crossorigin="anonymous">
-
-
 </head>
 
 <body>
@@ -23,10 +21,10 @@
     <h1 class="pb-0 border-bottom row">
         <span class="col-sm-6 pb-4 display-4"><em>User Information</em></span>
         <span class="col-sm-6 text-sm-right pb-4">
-            <form action="/user/delete" method="post" onsubmit="return confirm('Are you sure?');">
-                <input type="hidden" name="id" value="${user?.id}"/>
-                <button class="btn btn-danger btn-outline-danger d-block d-sm-inline-block">Delete Customer</button>
-            </form>
+%{--            <form action="/user/delete" method="post" onsubmit="return confirm('Are you sure?');">--}%
+%{--                <input type="hidden" name="id" value="${user?.id}"/>--}%
+%{--                <button class="btn btn-danger btn-outline-danger d-block d-sm-inline-block">Delete Customer</button>--}%
+%{--            </form>--}%
 
             <form action="#" method="post">
                 <input type="hidden" name="id" value=""/>
@@ -86,16 +84,6 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-6">
-                    <label for="role">Role</label>
-                    <g:select  class="form-control" name="role.id" id="role"
-                               from="${com.learning.app.Role.list()}"
-                               optionKey="id" value="${user?.getAuthorities()}"
-                               multiple="multiple" disabled = "true"/>
-                </div>
-            </div>
-
-            <div class="row">
                 <div class="col">
                     <button type="submit" class="btn btn-success btn-block">Save Changes</button>
                 </div>
@@ -104,9 +92,9 @@
     </div>
 </div>
 
-    <script>
-        document.getElementById("dateOfBirth").value = user?.dateOfBirth;
-    </script>
+<script>
+    document.getElementById("dateOfBirth").value = ${user?.address};
+</script>
 
 </body>
 </html>

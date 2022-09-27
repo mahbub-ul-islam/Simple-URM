@@ -4,17 +4,18 @@ import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 
-
 @Transactional
 @Secured('permitAll')
 class RegisterController {
+
+    UserService userService
 
     static allowedMethods = [register: "POST"]
 
     def index() { }
 
     def register() {
-
+        print "Hello register!\n"
         if (!params.password.equals(params.repassword)) {
             flash.message = "Password and Re-Password not match"
             redirect action: "index"
@@ -58,5 +59,11 @@ class RegisterController {
             }
 
         }
+    }
+
+    def User emailValidation(String email) {
+        print "Hello emailValidation!\n"
+        User user = userService.findByEmail(email)
+        return user
     }
 }

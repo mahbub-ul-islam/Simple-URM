@@ -7,30 +7,47 @@
         <g:layoutTitle default="Grails"/>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+
+
+    <script src=
+            "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
+    </script>
+
+    <script src=
+            "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
+    </script>
+
+    <link href=
+          "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+          rel="stylesheet" type="text/css" />
 
     <asset:stylesheet src="application.css"/>
 
-    <g:layoutHead/>
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top justify-content-between" role="navigation">
-    <a class="navbar-brand">Navbar</a>
+    <a class="navbar-brand">User Management System</a>
     <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
         <ul class="nav navbar-nav ml-auto">
-            <g:pageProperty name="page.nav"/>
+
             <sec:ifLoggedIn>
-                <li class="nav-link dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                <li class="nav-link navbar-brand  px-0 mx-0">
+                    <label  class="nav-link text-info">
+                        Hi,
                         <sec:loggedInUserInfo field='firstName'/>
-                    </a>
-                    <div class="dropdown-menu navbar-dark">
+                    </label >
+                </li>
+                <li class="nav-link navbar-brand px-0 mx-0">
+                    <a class="nav-link  px-1 mx-0" href="#" >
                         <g:form controller="logout">
-                            <g:submitButton class="dropdown-item navbar-dark color-light" name="Submit" value="Logout" style="color: gray" />
+                            <g:submitButton class="navbar-dark color-light" name="Submit" value="Logout" style="color: gray" />
                         </g:form>
-                    </div>
+                    </a>
                 </li>
             </sec:ifLoggedIn>
         </ul>
@@ -38,15 +55,6 @@
 </nav>
 
 <g:layoutBody/>
-
-
-
-
-<div id="spinner" class="spinner" style="display:none;">
-    <g:message code="spinner.alt" default="Loading&hellip;"/>
-</div>
-
-<asset:javascript src="application.js"/>
 
 </body>
 </html>

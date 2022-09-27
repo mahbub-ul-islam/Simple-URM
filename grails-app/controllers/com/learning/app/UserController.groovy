@@ -2,15 +2,31 @@ package com.learning.app
 
 import grails.converters.JSON
 import grails.gorm.PagedResultList
+import grails.plugin.springsecurity.SpringSecurityService
+import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 
 class UserController {
 
     UserService userService
+    SpringSecurityService springSecurityService
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
-    def index() { }
+    def index() {
+
+        if (SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
+            redirect controller: 'user', action: 'admin'
+        }
+        else if (SpringSecurityUtils.ifAllGranted('ROLE_USER')) {
+            redirect controller: 'profile', action: 'index'
+        }
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+    def admin() {
+
+    }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def data_for_datatable() {
@@ -98,5 +114,39 @@ class UserController {
 
         redirect action:'index'
     }
+
+//    @Secured('permitAll')
+//    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+//    def editPassword () {
+//        EditPasswordCommand command
+//        flash.message = null
+//
+////        if (request.get) {
+////            render view: "/user/editPassword" , model:[command: new EditPasswordCommand()]
+////            return
+////        }
+////
+////        command.validate()
+////
+////        if (command.hasErrors()) {
+////            render view: "/user/editPassword" , model:[command: command]
+////            return
+////        }
+//        User user = springSecurityService.currentUser;
+//        String encodedPassword = springSecurityService.encodePassword(command.currentPassword)
+//        if (encodedPassword != (user.password)) {
+//            flash.error = message(code: 'command.password.error.invalid')
+//            render view: "/user/editPassword" , model:[command: new EditPasswordCommand()]
+//            return;
+//        }
+//        user.password = command.password
+//        user.save(flush: true);
+//
+//        flash.message = message(code: 'spring.security.resetPassword.success')
+//        render view: "/user/editPassword" , model:[command: new EditPasswordCommand()]
+//    }
+
+//    def roles = springSecurityService.getPrincipal()
+
 
 }

@@ -10,4 +10,6 @@ interface UserService {
     void delete(Serializable id)
 
     User save(User user)
+
+    User findByEmail(email)
 }
